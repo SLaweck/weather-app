@@ -1,19 +1,35 @@
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component, effect, inject, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
 import { WeatherService } from './weather/weather.service';
-import { DatePipe } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MainView, tempSuffixes, weatherUnits, WeatherUnits, windSuffixes } from './config';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterOutlet, DatePipe],
+  imports: [RouterOutlet, DatePipe, DecimalPipe, MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, MatListModule, ReactiveFormsModule],
 })
 export class AppComponent implements OnInit {
   title = 'weather-app';
   weatherService = inject(WeatherService);
   citiesWeather = this.weatherService.citiesWeather;
   cityForecast = this.weatherService.cityForecast;
+
+  mainView: MainView = 'list';
+  weatherUnits: WeatherUnits = weatherUnits;
+  tempUnit = tempSuffixes[weatherUnits];
+  windUnit = windSuffixes[weatherUnits];
+
+  cityControl = new FormControl();
+  formGroup = new FormGroup({ city: this.cityControl });
+
 
   constructor() {
     effect(
@@ -63,7 +79,7 @@ export class AppComponent implements OnInit {
     // );
   }
 
-  onCityClicker(cityName: string): void {
+  onCityClicked(cityName: string): void {
     this.weatherService.loadCityForecast(cityName);
     // this.weatherService.getCityForecast(cityName).then(
     //   (value) => {
@@ -75,6 +91,20 @@ export class AppComponent implements OnInit {
 
   onRefreshClicked(): void {
     this.weatherService.refreshCitiesWeather();
+  }
+
+  onViewMenuClicked(mainView: MainView): void {
+    this.mainView = mainView;
+  }
+
+  onUnitsMenuClicked(units: WeatherUnits): void {
+    this.weatherUnits = units;
+    this.tempUnit = tempSuffixes[units];
+    this.windUnit = windSuffixes[units];  
+  }
+
+  onCityListClicked() {
+    console.log('Load forecast data for:', this.cityControl.value);
   }
 
   getDateFromTimestamp(dt: number): Date {

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { lastValueFrom, Observable, take } from 'rxjs';
-import { appId, citiesList, forecastCnt, forecastUrl, weatherUnits, weatherUrl } from '../config';
+import { appId, citiesList, forecastCnt, forecastUrl, WeatherUnits, weatherUnits, weatherUrl } from '../config';
 import { ForecastData } from './forecast-data.interface';
 import { WeatherData } from './weather-data.interface';
 
@@ -36,7 +36,7 @@ export class WeatherService {
     return await lastValueFrom(this.getCityForecastObservable(cityName).pipe(take(1)));
   }
 
-  refreshCitiesWeather(): Signal<WeatherData[]> {
+  refreshCitiesWeather(units: WeatherUnits = 'metric'): Signal<WeatherData[]> {
     const getCityWeatherPromises: Promise<WeatherData>[] = [];
     for(const cityName of citiesList) {
       // console.log('Get weather for:', cityName);

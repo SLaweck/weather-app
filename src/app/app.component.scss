@@ -1,3 +1,43 @@
+
+@use '@angular/material' as mat;
+
+.nav-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-icon.primary-icon {
+  color: var(--mat-sys-primary);
+}
+
+// .primary-icon {
+//   @include mat.icon-overrides((
+//     color: var(--mat-sys-primary),
+//   ));
+// }
+
+.city-box {
+  width: 40%;
+}
+
+.temp-box {
+  width: 30%;
+}
+
+.wind-box {
+  width: 30%;
+}
+
+.city-name, .temp-value, .wind-value {
+  margin-left: 6px;
+}
+
+
+
+.angular-logo {
+  max-width: 7.2rem;
+}
+
+
 :host {
   --bright-blue: oklch(51.01% 0.274 263.83);
   --electric-violet: oklch(53.18% 0.28 296.97);
@@ -62,9 +102,6 @@ main {
   position: relative;
 }
 
-.angular-logo {
-  max-width: 9.2rem;
-}
 
 .content {
   display: flex;
