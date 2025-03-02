@@ -22,9 +22,10 @@ export class AppComponent implements OnInit {
   weatherService = inject(WeatherService);
   citiesWeather = this.weatherService.citiesWeather;
   cityForecast = this.weatherService.cityForecast;
+  weatherUnits = this.weatherService.weatherUnits;
 
   mainView: MainView = 'list';
-  weatherUnits: WeatherUnits = defaultWeatherUnits;
+  // weatherUnits: WeatherUnits = defaultWeatherUnits;
   tempUnit = tempSuffixes[defaultWeatherUnits];
   windUnit = windSuffixes[defaultWeatherUnits];
 
@@ -49,6 +50,13 @@ export class AppComponent implements OnInit {
           console.log('AppComponent: detected forecast data clearing!');
         }
         console.log('AppComponent: Forecast', forecast);
+      }
+    );
+    effect(
+      () => {
+        const weatherUnits = this.weatherUnits();
+        this.tempUnit = weatherUnits.temp;
+        this.windUnit = weatherUnits.wind;
       }
     );
   }
@@ -98,11 +106,11 @@ export class AppComponent implements OnInit {
     this.mainView = mainView;
   }
 
-  onUnitsMenuClicked(units: WeatherUnits): void {
-    this.weatherUnits = units;
-    this.tempUnit = tempSuffixes[units];
-    this.windUnit = windSuffixes[units];  
-  }
+  // onUnitsMenuClicked(units: WeatherUnits): void {
+  //   this.weatherUnits = units;
+  //   this.tempUnit = tempSuffixes[units];
+  //   this.windUnit = windSuffixes[units];  
+  // }
 
   onCityListClicked() {
     console.log('Load forecast data for:', this.cityControl.value);

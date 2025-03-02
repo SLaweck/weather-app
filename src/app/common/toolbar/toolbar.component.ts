@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { defaultWeatherUnits, MainView, WeatherUnits } from '../../config';
-import { MatButtonModule } from '@angular/material/button';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { WeatherUnits } from '../../config';
+import { WeatherService } from '../../weather/weather.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,17 +14,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './toolbar.component.scss',
 })
 export class ToolbarComponent {
-  weatherUnits = defaultWeatherUnits;
+  weatherService = inject(WeatherService);
+  weatherUnits = this.weatherService.weatherUnits;
 
   onRefreshClicked() {
     console.log('Toolbar: refresh clicked!');
-  }
-
-  onViewMenuClicked(view: MainView) {
-    console.log('Toolbar: switch main view to:', view);
+    this.weatherService.refreshCitiesWeather();
   }
 
   onUnitsMenuClicked(units: WeatherUnits) {
     console.log('Toolbar: switch weather and forecast units to:', units);
+    this.weatherService.setWeatherUnits(units);
   }
 }

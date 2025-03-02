@@ -82,15 +82,15 @@
   
   <mat-menu #unit="matMenu">
     <button mat-menu-item (click)="onUnitsMenuClicked('metric')">
-      <mat-icon [class.selected-icon]="weatherUnits === 'metric'">settings</mat-icon>
+      <mat-icon [class.selected-icon]="weatherUnits().units === 'metric'">settings</mat-icon>
       <span>Metric</span>
     </button>
     <button mat-menu-item (click)="onUnitsMenuClicked('imperial')">
-      <mat-icon [class.selected-icon]="weatherUnits === 'imperial'">language</mat-icon>
+      <mat-icon [class.selected-icon]="weatherUnits().units === 'imperial'">language</mat-icon>
       <span>Imperial</span>
     </button>
     <button mat-menu-item (click)="onUnitsMenuClicked('standard')">
-      <mat-icon [class.selected-icon]="weatherUnits === 'standard'">verified</mat-icon>
+      <mat-icon [class.selected-icon]="weatherUnits().units === 'standard'">verified</mat-icon>
       <span>Standard</span>
     </button>
   </mat-menu>
