@@ -16,8 +16,9 @@ export class ForecastTableComponent {
   units = this.weatherService.weatherUnits;
   forecastList = computed(
     () => {
-      console.log('Forecast table list:', this.cityForecast()?.list)
-      return this.cityForecast()?.list || [];
+      const cityForecast = this.cityForecast();
+      console.log('Forecast table list:', cityForecast?.list)
+      return cityForecast?.list || [];
     }
   );
   displayedColumns: string[] = ['datetime', 'weather', 'temp', 'feels_like', 'temp_min', 'temp_max', 'pressure', 'wind', 'gust'];

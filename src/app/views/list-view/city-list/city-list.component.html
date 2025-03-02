@@ -3,7 +3,7 @@
     <mat-selection-list [formControl]="cityControl" name="city" [multiple]="false" (selectionChange)="onCityListClicked()">
       @for (city of citiesWeather(); track city.name) {
         <mat-list-option [value]="city.name">
-          <div style="display: flex; flex-direction: row;">
+          <div class="city-option-label">
             <div class="city-box">
               <mat-icon matListItemIcon style="line-height: 1.4;">location_city</mat-icon>
               <span class="city-name">{{city.name}}</span>

@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, effect, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -14,28 +14,49 @@ import { WeatherService } from '../../../weather/weather.service';
 })
 export class CityListComponent {
   weatherService = inject(WeatherService)
+  // changeDetectorRef = inject(ChangeDetectorRef);
   citiesWeather = this.weatherService.citiesWeather;
   cityForecast = this.weatherService.cityForecast;
   units = this.weatherService.weatherUnits;
+  // myCitiesList = computed(
+  //   () => {
+  //     const citiesWeather = this.citiesWeather();
+  //     return [...citiesWeather];
+  //   }
+  // );
 
   cityControl = new FormControl();
   formGroup = new FormGroup({ city: this.cityControl });
 
   constructor() {
+    // this.cityControl.setValue('London')
     effect(
       () => {
+        const citiesWeather = this.citiesWeather();
         const cityForecast = this.cityForecast();
-        if (cityForecast === null) {
-          this.cityControl.setValue(undefined);
-        } else if (!this.cityControl.value && cityForecast) {
-          this.cityControl.setValue(cityForecast.city.name);
+        const cityName = this.cityControl.value ? this.cityControl.value[0] : undefined;
+        console.log('CityListComponent: effect:', citiesWeather, cityForecast, this.cityControl.value, this.cityControl, this.formGroup);
+        if (cityForecast === null && citiesWeather && cityName) {
+          console.log('CityListComponent: load city forecast:', cityName, this.cityControl);
+          this.weatherService.loadCityForecast(cityName)
+          // this.cityControl.setValue(null);
+          // console.log('CityListComponent: clear selection:', this.cityControl.value, this.cityControl);
+        } else if (!cityName && cityForecast && citiesWeather) {
+          const cityName = cityForecast.city.name;
+          console.log('CityListComponent: before set selection to:', cityName, cityName, this.cityControl, this.formGroup);
+          this.cityControl.setValue([cityName]);
+          console.log('CityListComponent: set selection to:', cityName, cityName, this.cityControl, this.formGroup);
         }
+        // this.changeDetectorRef.markForCheck();
       }
     );
   }
 
   onCityListClicked() {
-    console.log('Load forecast data for:', this.cityControl.value);
-    this.weatherService.loadCityForecast(this.cityControl.value);
+    const cityName = this.cityControl.value ? this.cityControl.value[0] : undefined;
+    if (cityName) {
+      console.log('Load forecast data for:', cityName, this.cityControl.value);
+      this.weatherService.loadCityForecast(cityName);
+    }
   }
 }

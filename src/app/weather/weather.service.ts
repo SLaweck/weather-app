@@ -53,7 +53,15 @@ export class WeatherService {
 
   refreshCitiesWeather(units: WeatherUnits = this.weatherUnits().units): Signal<WeatherData[]> {
     // clear choosen frecast city when refreshing weather for all cities
+    this.citiesWeatherSignal.set([]);
     this.cityForecastSignal.set(null);
+    if (units !== this.weatherUnits().units) {
+      this.weatherUnitsSignal.set({
+        units,
+        temp: tempSuffixes[units],
+        wind: windSuffixes[units],
+      });
+    }
     const getCityWeatherPromises: Promise<WeatherData>[] = [];
     for(const cityName of citiesList) {
       // console.log('Get weather for:', cityName);
@@ -65,13 +73,6 @@ export class WeatherService {
         // for(const cityWeather of this.citiesWeather()) {
         //   console.log('WeatherService: new weather data set for:', cityWeather.name);
         // }
-        if (units !== this.weatherUnits().units) {
-          this.weatherUnitsSignal.set({
-            units,
-            temp: tempSuffixes[units],
-            wind: windSuffixes[units],
-          });
-        }
       }
     );
     return this.citiesWeather;

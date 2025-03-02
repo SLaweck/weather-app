@@ -13,6 +13,11 @@ mat-selection-list {
   width: 100%;
 }
 
+.city-option-label {
+  display: flex;
+  flex-direction: row;
+}
+
 .city-box {
   width: 40%;
 }

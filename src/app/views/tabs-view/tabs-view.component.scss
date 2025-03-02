@@ -1,0 +1,57 @@
+
+@use '@angular/material' as mat;
+
+
+:host {
+  --mdc-secondary-navigation-tab-container-height: 80px;
+
+  display: flex;
+  padding: 16px;
+  margin-top: 24px;
+  min-height: 85vh;
+
+  .mat-mdc-tab-group {
+    display: flex;
+    width: 100%;
+    max-height: 85vh;
+    overflow: auto;
+  }
+
+  .progress-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+
+.city-tab-label {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+
+  .second-line {
+    display: flex;
+    flex-direction: row;
+    padding: 0 4px;
+    width: 100%;
+  }
+}
+
+.city-box {
+  padding: 0 4px;
+  width: 100%;
+}
+
+.temp-box {
+  width: 50%;
+}
+
+.wind-box {
+  width: 50%;
+}
+
+.city-name, .temp-value, .wind-value {
+  margin-left: 8px;
+}

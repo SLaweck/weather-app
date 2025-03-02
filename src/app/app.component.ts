@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
         const forecast = this.cityForecast();
         if (forecast) {
           console.log('AppComponent: detected new forecast data for:', forecast.city.name, 'on:', forecast.list[0].dt_txt, 'temp feels like:', forecast.list[0].main.feels_like);
-        } else {
+        } else if (forecast === null) {
           console.log('AppComponent: detected forecast data clearing!');
         }
         console.log('AppComponent: Forecast', forecast);
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
     setTimeout(() => {
       this.weatherService.refreshCitiesWeather();
-    }, 5000);
+    }, 2000);
 
   }
 }

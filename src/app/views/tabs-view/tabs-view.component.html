@@ -1,1 +1,33 @@
-<p>tabs-view works!</p>
+@if(citiesWeather().length > 0) {
+  <mat-tab-group (selectedTabChange)="onSelectedTabChange($event)" [(selectedIndex)]="selectedIndex">
+    @for(city of citiesWeather(); track city.name) {
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="city-tab-label">
+            <div class="city-box">
+              <mat-icon matListItemIcon style="line-height: 1.4;">location_city</mat-icon>
+              <span class="city-name">{{city.name}}</span>
+            </div>
+            <div class="second-line">
+              <div class="temp-box">
+                <mat-icon matListItemIcon style="line-height: 1.4;">thermostat</mat-icon>
+                <span class="temp-value">{{city.main.temp | number: '1.1-1'}} {{units().temp}}</span>
+              </div>
+              <div class="wind-box">
+                <mat-icon matListItemIcon style="line-height: 1.4;">air</mat-icon>
+                <span class="wind-value">{{city.wind.speed | number: '1.1-1'}} {{units().wind}}</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template matTabContent>
+          <app-forecast-table/>
+        </ng-template>
+      </mat-tab>
+    }
+  </mat-tab-group>
+} @else {
+  <div class="progress-box">
+    <mat-spinner/>
+  </div>
+}
