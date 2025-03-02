@@ -1,0 +1,24 @@
+
+@use '@angular/material' as mat;
+
+:host {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  min-height: 350px;
+  max-height: 100%;
+  overflow: auto;
+
+  .spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 350px;
+  }
+
+  .mat-column-temp, .mat-column-feels_like, .mat-column-temp_min, .mat-column-temp_max,
+  .mat-column-pessure, .mat-column-wind, .mat-column-gust {
+    text-align: right;
+  }
+}

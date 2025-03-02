@@ -24,8 +24,11 @@ export class CityListComponent {
   constructor() {
     effect(
       () => {
-        if (this.cityForecast() === null) {
+        const cityForecast = this.cityForecast();
+        if (cityForecast === null) {
           this.cityControl.setValue(undefined);
+        } else if (!this.cityControl.value && cityForecast) {
+          this.cityControl.setValue(cityForecast.city.name);
         }
       }
     );

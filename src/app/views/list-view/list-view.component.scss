@@ -1,3 +1,4 @@
+
 @use '@angular/material' as mat;
 
 :host {
@@ -18,15 +19,20 @@
   width: 100%;
 
   .left-panel {
-    width: 40%;
+    width: 35%;
+    min-width: 475px;
     display: flex;
+    align-items: start;
     justify-content: center;
+    padding-top: 20px;
     border: 1px solid lightgreen;
   }
 
   .right-panel {
-    width: 60%;
+    width: 65%;
+    max-height: 80vh;
     display: flex;
+    align-items: start;
     justify-content: center;
     border: 1px solid pink;
   }

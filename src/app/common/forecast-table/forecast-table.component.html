@@ -1,1 +1,69 @@
-<p>forecast-table works!</p>
+
+@if (cityForecast()) {
+  <table mat-table [dataSource]="forecastList()" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Datetime Column -->
+    <ng-container matColumnDef="datetime">
+      <th mat-header-cell *matHeaderCellDef> Time </th>
+      <td mat-cell *matCellDef="let element"> {{element.dt*1000 | date: 'short'}} </td>
+    </ng-container>
+
+    <!-- Temperature Column -->
+    <ng-container matColumnDef="temp">
+      <th mat-header-cell *matHeaderCellDef> Temperature </th>
+      <td mat-cell *matCellDef="let element"> {{element.main.temp | number: '1.1-1'}} {{units().temp}} </td>
+    </ng-container>
+
+    <!-- Feels like Column -->
+    <ng-container matColumnDef="feels_like">
+      <th mat-header-cell *matHeaderCellDef> Feels like </th>
+      <td mat-cell *matCellDef="let element"> {{element.main.feels_like | number: '1.1-1'}} {{units().temp}} </td>
+    </ng-container>
+
+    <!-- Temp min Column -->
+    <ng-container matColumnDef="temp_min">
+      <th mat-header-cell *matHeaderCellDef> Min temp </th>
+      <td mat-cell *matCellDef="let element"> {{element.main.temp_min | number: '1.1-1'}} {{units().temp}} </td>
+    </ng-container>
+
+    <!-- Temp max Column -->
+    <ng-container matColumnDef="temp_max">
+      <th mat-header-cell *matHeaderCellDef> Max temp </th>
+      <td mat-cell *matCellDef="let element"> {{element.main.temp_max | number: '1.1-1'}} {{units().temp}} </td>
+    </ng-container>
+
+    <!-- Pressure Column -->
+    <ng-container matColumnDef="pressure">
+      <th mat-header-cell *matHeaderCellDef> Pressure </th>
+      <td mat-cell *matCellDef="let element"> {{element.main.pressure | number: '1.0-0'}} hPa </td>
+    </ng-container>
+
+    <!-- Wind speed Column -->
+    <ng-container matColumnDef="wind">
+      <th mat-header-cell *matHeaderCellDef> Wind speed </th>
+      <td mat-cell *matCellDef="let element"> {{element.wind.speed | number: '1.1-1'}} {{units().wind}} </td>
+    </ng-container>
+
+    <!-- Wind gusts Column -->
+    <ng-container matColumnDef="gust">
+      <th mat-header-cell *matHeaderCellDef> Wind gusts </th>
+      <td mat-cell *matCellDef="let element"> {{element.wind.gust | number: '1.1-1'}} {{units().wind}} </td>
+    </ng-container>
+
+    <!-- Weather Column -->
+    <ng-container matColumnDef="weather">
+      <th mat-header-cell *matHeaderCellDef> Weather </th>
+      <td mat-cell *matCellDef="let element"> {{element.weather[0].main}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+} @else if (cityForecast() === undefined) {
+  <div class="spinner">
+    <mat-spinner/>
+  </div>
+}
