@@ -106,6 +106,8 @@ export class WeatherService {
   }
 
   setWeatherUnits(units: WeatherUnits) {
+    // when switching units forecast cache has to be cleared
+    this.citiesForecastCache = {};
     this.refreshCitiesWeather(units);
   }
 }

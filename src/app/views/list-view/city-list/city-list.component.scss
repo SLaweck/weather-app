@@ -1,0 +1,36 @@
+@use '@angular/material' as mat;
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // position: relative;
+  min-width: 450px;
+  min-height: 300px;
+}
+
+mat-selection-list {
+  width: 100%;
+}
+
+.city-box {
+  width: 40%;
+}
+
+.temp-box {
+  width: 30%;
+}
+
+.wind-box {
+  width: 30%;
+}
+
+.city-name, .temp-value, .wind-value {
+  margin-left: 6px;
+}
+
+// mat-spinner {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+// }

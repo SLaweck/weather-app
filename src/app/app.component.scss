@@ -1,20 +1,6 @@
 
 @use '@angular/material' as mat;
 
-.nav-spacer {
-  flex: 1 1 auto;
-}
-
-.mat-icon.primary-icon {
-  color: var(--mat-sys-primary);
-}
-
-// .primary-icon {
-//   @include mat.icon-overrides((
-//     color: var(--mat-sys-primary),
-//   ));
-// }
-
 .city-box {
   width: 40%;
 }
@@ -31,11 +17,6 @@
   margin-left: 6px;
 }
 
-
-
-.angular-logo {
-  max-width: 7.2rem;
-}
 
 
 :host {

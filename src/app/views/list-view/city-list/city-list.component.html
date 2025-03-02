@@ -1,1 +1,29 @@
-<p>city-list works!</p>
+<form [formGroup]="formGroup">
+  @if (citiesWeather().length > 0) {
+    <mat-selection-list [formControl]="cityControl" name="city" [multiple]="false" (selectionChange)="onCityListClicked()">
+      @for (city of citiesWeather(); track city.name) {
+        <mat-list-option [value]="city.name">
+          <div style="display: flex; flex-direction: row;">
+            <div class="city-box">
+              <mat-icon matListItemIcon style="line-height: 1.4;">location_city</mat-icon>
+              <span class="city-name">{{city.name}}</span>
+            </div>
+            <div class="temp-box">
+              <mat-icon matListItemIcon style="line-height: 1.4;">thermostat</mat-icon>
+              <span class="temp-value">{{city.main.temp | number: '1.1-1'}} {{units().temp}}</span>
+            </div>
+            <div class="wind-box">
+              <mat-icon matListItemIcon style="line-height: 1.4;">air</mat-icon>
+              <span class="wind-value">{{city.wind.speed | number: '1.1-1'}} {{units().wind}}</span>
+            </div>
+          </div>
+        </mat-list-option>
+      }
+    </mat-selection-list>
+  } @else {
+    <mat-spinner/>
+  }
+</form>
+<p>
+   Option selected: {{cityControl.value ? cityControl.value[0] : 'None'}} 
+</p>
