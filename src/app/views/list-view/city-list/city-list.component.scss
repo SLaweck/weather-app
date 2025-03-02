@@ -4,9 +4,9 @@ form {
   display: flex;
   align-items: center;
   justify-content: center;
-  // position: relative;
   min-width: 450px;
   min-height: 300px;
+  max-width: 500px;
 }
 
 mat-selection-list {
@@ -28,9 +28,3 @@ mat-selection-list {
 .city-name, .temp-value, .wind-value {
   margin-left: 6px;
 }
-
-// mat-spinner {
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-// }

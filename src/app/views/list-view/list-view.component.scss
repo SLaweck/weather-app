@@ -1,0 +1,40 @@
+@use '@angular/material' as mat;
+
+:host {
+  --electric-violet: oklch(53.18% 0.28 296.97);
+  --vivid-pink: oklch(69.02% 0.277 332.77);
+  --orange-red: oklch(63.32% 0.24 31.68);
+
+  --red-to-pink-to-purple-vertical-gradient: linear-gradient(
+    180deg,
+    var(--orange-red) 0%,
+    var(--vivid-pink) 50%,
+    var(--electric-violet) 100%
+  );
+
+  display: flex;
+  flex-direction: row;
+  padding-top: 60px;
+  width: 100%;
+
+  .left-panel {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid lightgreen;
+  }
+
+  .right-panel {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid pink;
+  }
+
+  .divider {
+    width: 1px;
+    background: var(--red-to-pink-to-purple-vertical-gradient);
+    margin-inline: 0.5rem;
+  }
+
+}

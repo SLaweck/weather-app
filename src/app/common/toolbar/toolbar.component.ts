@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -14,6 +14,7 @@ import { WeatherService } from '../../weather/weather.service';
   styleUrl: './toolbar.component.scss',
 })
 export class ToolbarComponent {
+  title = input.required<string>();
   weatherService = inject(WeatherService);
   weatherUnits = this.weatherService.weatherUnits;
 
