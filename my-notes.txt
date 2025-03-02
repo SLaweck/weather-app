@@ -1,0 +1,18 @@
+
+Switcheng to zoneless change detection
+
+1. Exchange provideZoneChangeDetection({ eventCoalescing: true }) with provideExperimentalZonelessChangeDetection()
+
+  // providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient()]
+
+2. Remove reference to zone.js from angular.json
+
+Removed zone.js from angular.json file:
+            "polyfills": [
+              "zone.js"
+            ],
+and
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],

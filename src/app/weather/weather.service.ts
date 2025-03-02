@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { lastValueFrom, Observable, take } from 'rxjs';
-import { appId, citiesList, forecastCnt, forecastUrl, WeatherUnits, weatherUnits, weatherUrl } from '../config';
+import { appId, citiesList, defaultForecastCnt, forecastUrl, WeatherUnits, defaultWeatherUnits, weatherUrl } from '../config';
 import { ForecastData } from './forecast-data.interface';
 import { WeatherData } from './weather-data.interface';
 
@@ -18,11 +18,11 @@ export class WeatherService {
 
   constructor() {}
 
-  private getCityWeatherObservable(cityName: string, units = weatherUnits): Observable<WeatherData> {
+  private getCityWeatherObservable(cityName: string, units = defaultWeatherUnits): Observable<WeatherData> {
     return this.httpClient.get<WeatherData>(`${weatherUrl}?q=${cityName}&units=${units}&appid=${appId}`);
   }
 
-  private getCityForecastObservable(cityName: string, units = weatherUnits, cnt = forecastCnt): Observable<ForecastData> {
+  private getCityForecastObservable(cityName: string, units = defaultWeatherUnits, cnt = defaultForecastCnt): Observable<ForecastData> {
     return this.httpClient.get<ForecastData>(`${forecastUrl}?q=${cityName}&units=${units}&cnt=${cnt}&appid=${appId}`);
   }
 

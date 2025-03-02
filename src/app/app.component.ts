@@ -8,13 +8,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
 import { WeatherService } from './weather/weather.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MainView, tempSuffixes, weatherUnits, WeatherUnits, windSuffixes } from './config';
+import { MainView, tempSuffixes, defaultWeatherUnits, WeatherUnits, windSuffixes } from './config';
+import { ToolbarComponent } from "./common/toolbar/toolbar.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterOutlet, DatePipe, DecimalPipe, MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, MatListModule, ReactiveFormsModule],
+  imports: [RouterOutlet, DatePipe, DecimalPipe, MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, MatListModule, ReactiveFormsModule, ToolbarComponent],
 })
 export class AppComponent implements OnInit {
   title = 'weather-app';
@@ -23,9 +24,9 @@ export class AppComponent implements OnInit {
   cityForecast = this.weatherService.cityForecast;
 
   mainView: MainView = 'list';
-  weatherUnits: WeatherUnits = weatherUnits;
-  tempUnit = tempSuffixes[weatherUnits];
-  windUnit = windSuffixes[weatherUnits];
+  weatherUnits: WeatherUnits = defaultWeatherUnits;
+  tempUnit = tempSuffixes[defaultWeatherUnits];
+  windUnit = windSuffixes[defaultWeatherUnits];
 
   cityControl = new FormControl();
   formGroup = new FormGroup({ city: this.cityControl });

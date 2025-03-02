@@ -1,0 +1,16 @@
+
+@use '@angular/material' as mat;
+
+.nav-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-icon.selected-icon, .selected-link .mat-icon {
+  color: var(--mat-sys-primary);
+}
+
+
+
+.angular-logo {
+  max-width: 7.2rem;
+}
