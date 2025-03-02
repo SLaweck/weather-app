@@ -1,1 +1,28 @@
-<p>accordion-view works!</p>
+
+@if (citiesWeather().length > 0) {
+  <mat-accordion>
+    @for (city of citiesWeather(); track city.name ) {
+      <mat-expansion-panel [expanded]="selectedCity() === city.name" (opened)="onPanelOpen(city.name)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>location_city</mat-icon>
+            <span>{{city.name}}</span>
+          </mat-panel-title>
+          <mat-panel-description>
+            <mat-icon class="temp">thermostat</mat-icon>
+            <span>{{city.main.temp | number: '1.1-1'}} {{units().temp}}</span>
+            <mat-icon class="wind">air</mat-icon>
+            <span>{{city.wind.speed | number: '1.1-1'}} {{units().wind}}</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <app-forecast-table/>
+        </ng-template>
+      </mat-expansion-panel>
+    }
+  </mat-accordion>
+} @else {
+  <div class="spinner-box">
+    <mat-spinner></mat-spinner>
+  </div>
+}
