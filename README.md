@@ -12,48 +12,14 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+## Code choices
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+As this is some kind of a showcase, I decided to use the experimental zoneless change detection feature. I've undertaken this because that feature, along with signals and new syntax, represents the future of Angular. When zoneless functionality reaches a stable phase, it will open up pathways to a new level of productivity without messing up with on-push change detection and executing code outside Angular's zone library.
+The app uses the Angular Material library. It consists of three views, a toolbar with a structural menu that allows users to switch between views, and weather units. Additionally, a button on the right can reload weather data for predefined cities. The list of cities and many other defaults are localised in the config.ts file. Last, but not least, a shared component is used in all views and shows forecast data in the table. 
+If I could have more time, I would:
+1. Add error detection and handling in weather service
+2. Add more unit tests (I lost a lot of time on figuring out why them wouldn't work, but finally I've managed to fix problems, but they aren't fully compatible with zoneless functionality)
+3. Improve styling and theming Angular Material components
 
-```bash
-ng generate component component-name
-```
+I hope that you'll enjoy my little project.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
