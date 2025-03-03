@@ -40,11 +40,9 @@ export class WeatherService {
 
   // Async wrap-arounds that returns Promises
   async getCityWeather(cityName: string, units: WeatherUnits): Promise<WeatherData> {
-    console.log('Loading new weather data for:', cityName);
     return await lastValueFrom(this.getCityWeatherObservable(cityName, units).pipe(take(1)));
   }
   async getCityForecast(cityName: string, units: WeatherUnits): Promise<ForecastData> {
-    console.log('Loading new forecast data for:', cityName);
     // sets signal to undef when starts requesting forecast for loading indicator
     this.cityForecastSignal.set(undefined);
     return await lastValueFrom(this.getCityForecastObservable(cityName, units).pipe(take(1)));
@@ -64,15 +62,11 @@ export class WeatherService {
     }
     const getCityWeatherPromises: Promise<WeatherData>[] = [];
     for(const cityName of citiesList) {
-      // console.log('Get weather for:', cityName);
       getCityWeatherPromises.push(this.getCityWeather(cityName, units));
     }
     Promise.all(getCityWeatherPromises).then(
       (citiesWeather) => {
         this.citiesWeatherSignal.set(citiesWeather);
-        // for(const cityWeather of this.citiesWeather()) {
-        //   console.log('WeatherService: new weather data set for:', cityWeather.name);
-        // }
       }
     );
     return this.citiesWeather;

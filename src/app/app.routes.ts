@@ -16,8 +16,13 @@ export const routes: Routes = [
     path: 'accordion',
     component: AccordionViewComponent,
   },
-  // {
-  //   path: '',
-  //   redirectTo: 'list',
-  // },
+  {
+    path: '', 
+    redirectTo: 'list',
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard',
+  },
 ];

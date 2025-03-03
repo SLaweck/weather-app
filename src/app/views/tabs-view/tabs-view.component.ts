@@ -24,16 +24,13 @@ export class TabsViewComponent {
       () => {
         const citiesWeather = this.citiesWeather();
         const cityForecast = this.cityForecast();
-        console.log('Tabs view on signals effect:', citiesWeather, cityForecast, this.selectedIndex);
         if (cityForecast === null && citiesWeather.length > 0) {
           const cityName = citiesWeather[this.selectedIndex || 0].name;
-          console.log('Tabs view signal effect: loading city forecast:', cityName);
           this.weatherService.loadCityForecast(cityName);
         } else if (cityForecast && citiesWeather) {
           const cityName = cityForecast.city.name;
           const cityIndex = citiesWeather.findIndex((city) => city.name === cityName);
           if (cityIndex > -1 && cityIndex !== this.selectedIndex) {
-            console.log('Tabs view signal effect: set active tab to:', cityName, cityIndex);
             this.selectedIndex = cityIndex;
           }
         }
@@ -42,7 +39,6 @@ export class TabsViewComponent {
   }
 
   onSelectedTabChange(event: MatTabChangeEvent) {
-    console.log('Tabs view tab change:', event, this.selectedIndex);
     const cityName = this.citiesWeather()[this.selectedIndex].name;
     this.weatherService.loadCityForecast(cityName);
   }

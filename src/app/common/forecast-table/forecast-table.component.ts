@@ -17,7 +17,6 @@ export class ForecastTableComponent {
   forecastList = computed(
     () => {
       const cityForecast = this.cityForecast();
-      console.log('Forecast table list:', cityForecast?.list)
       return cityForecast?.list || [];
     }
   );

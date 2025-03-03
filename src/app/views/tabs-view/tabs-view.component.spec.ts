@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TabsViewComponent } from './tabs-view.component';
+import { appConfig } from '../../app.config';
 
 describe('TabsViewComponent', () => {
   let component: TabsViewComponent;
@@ -8,7 +9,9 @@ describe('TabsViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TabsViewComponent]
+      imports: [TabsViewComponent],
+      providers: appConfig.providers,
+      teardown: {destroyAfterEach: false},
     })
     .compileComponents();
 

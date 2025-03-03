@@ -19,12 +19,10 @@ export class ToolbarComponent {
   weatherUnits = this.weatherService.weatherUnits;
 
   onRefreshClicked() {
-    console.log('Toolbar: refresh clicked!');
     this.weatherService.refreshCitiesWeather();
   }
 
   onUnitsMenuClicked(units: WeatherUnits) {
-    console.log('Toolbar: switch weather and forecast units to:', units);
     this.weatherService.setWeatherUnits(units);
   }
 }

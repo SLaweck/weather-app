@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListViewComponent } from './list-view.component';
+import { appConfig } from '../../app.config';
 
 describe('ListViewComponent', () => {
   let component: ListViewComponent;
@@ -8,7 +9,9 @@ describe('ListViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListViewComponent]
+      imports: [ListViewComponent],
+      providers: appConfig.providers,
+      teardown: {destroyAfterEach: false},
     })
     .compileComponents();
 

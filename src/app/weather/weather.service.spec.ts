@@ -1,12 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
 import { WeatherService } from './weather.service';
+import { appConfig } from '../app.config';
 
 describe('WeatherService', () => {
   let service: WeatherService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: appConfig.providers,
+      teardown: {destroyAfterEach: false},
+    });
     service = TestBed.inject(WeatherService);
   });
 

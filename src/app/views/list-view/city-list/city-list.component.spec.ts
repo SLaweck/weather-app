@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CityListComponent } from './city-list.component';
+import { appConfig } from '../../../app.config';
 
 describe('CityListComponent', () => {
   let component: CityListComponent;
@@ -8,7 +9,9 @@ describe('CityListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CityListComponent]
+      imports: [CityListComponent],
+      providers: appConfig.providers,
+      teardown: {destroyAfterEach: false},
     })
     .compileComponents();
 

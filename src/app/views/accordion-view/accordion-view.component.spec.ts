@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccordionViewComponent } from './accordion-view.component';
+import { appConfig } from '../../app.config';
 
 describe('AccordionViewComponent', () => {
   let component: AccordionViewComponent;
@@ -8,7 +9,9 @@ describe('AccordionViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AccordionViewComponent]
+      imports: [AccordionViewComponent],
+      providers: appConfig.providers,
+      teardown: {destroyAfterEach: false},
     })
     .compileComponents();
 
