@@ -26,9 +26,8 @@ export class WeatherService {
   weatherUnits = this.weatherUnitsSignal.asReadonly();
 
   // cache for forecast requests
-  citiesForecastCache: { [key: string]: ForecastData } = {};
+  private citiesForecastCache: { [key: string]: ForecastData } = {};
 
-  constructor() {}
 
   // HTTP request that return Observables
   private getCityWeatherObservable(cityName: string, units: WeatherUnits): Observable<WeatherData> {
@@ -53,6 +52,7 @@ export class WeatherService {
     // clear choosen frecast city when refreshing weather for all cities
     this.citiesWeatherSignal.set([]);
     this.cityForecastSignal.set(null);
+    // if units was changed, send them in the signal
     if (units !== this.weatherUnits().units) {
       this.weatherUnitsSignal.set({
         units,
@@ -60,10 +60,12 @@ export class WeatherService {
         wind: windSuffixes[units],
       });
     }
+    // prepare list of promises for all cities
     const getCityWeatherPromises: Promise<WeatherData>[] = [];
     for(const cityName of citiesList) {
       getCityWeatherPromises.push(this.getCityWeather(cityName, units));
     }
+    // Execute all request write array to the signal
     Promise.all(getCityWeatherPromises).then(
       (citiesWeather) => {
         this.citiesWeatherSignal.set(citiesWeather);
@@ -74,10 +76,12 @@ export class WeatherService {
 
   loadCityForecast(cityName: string): Signal<ForecastData | undefined | null> {
     const units = this.weatherUnits().units;
+    // check if forecast is in cache
     if (this.citiesForecastCache[cityName]) {
       const forecast = this.citiesForecastCache[cityName];
       const now = new Date();
       const forecastTime = new Date(forecast.list[0].dt * 1000);
+      // check if first forecast isn't to old, if has time from the past so request new one
       if (forecast.list[0].dt < now.getTime() / 1000) {
         this.getCityForecast(cityName, units).then(
           (newForecast) => {
@@ -86,9 +90,11 @@ export class WeatherService {
           }
         );
       } else {
+        // otherwise serve it from cache
         this.cityForecastSignal.set(forecast);
       }
     } else {
+      // if not exist in cache - request it
       this.getCityForecast(cityName, units).then(
         (newForecast) => {
           this.citiesForecastCache[cityName] = newForecast;

@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   weatherService = inject(WeatherService);
 
   ngOnInit() {
-
+    // force requesting weather for default cities
     setTimeout(() => {
       this.weatherService.refreshCitiesWeather();
     }, 0);

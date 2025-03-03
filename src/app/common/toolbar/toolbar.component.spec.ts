@@ -24,4 +24,14 @@ describe('ToolbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it(`should have the 'WeatherApp' title`, () => {
+    expect(component.title()).toEqual('WeatherApp');
+  });
+
+  it('should render title', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('mat-toolbar')?.textContent).toContain('WeatherApp');
+  });
 });
