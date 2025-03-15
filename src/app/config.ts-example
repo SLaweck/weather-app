@@ -5,7 +5,7 @@ export const weatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
 export const forecastUrl = 'https://pro.openweathermap.org/data/2.5/forecast';
 export const defaultForecastCnt = 16;
 export const defaultWeatherUnits: WeatherUnits = 'metric';
-export const appId = '';
+export const appId = '<YOUR_API_KEY>';
 
 export const citiesList = ['Cardiff', 'London', 'Edinburgh', 'Belfast', 'Inverness'];
 export const tempSuffixes = { 'metric': '°C', 'imperial': '°F', 'standard': '°K' };

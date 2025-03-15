@@ -2,6 +2,12 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.9.
 
+## Prepare project to run
+
+1. You have to copy file /src/app/config.ts-example to /src/app/config.ts
+2. You need to obtain your API Key at https://home.openweathermap.org/api_keys (You need an account to do that)
+3. Add your API Key into config.ts by replacing a string: <YOUR_API_KEY>
+
 ## Development server
 
 To start a local development server, run:
