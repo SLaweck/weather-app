@@ -160,39 +160,6 @@ describe('TabsViewComponent', () => {
     expect(component.selectedIndex).toBe(0); // remains unchanged
   });
 
-
-
-// it('should set selectedIndex in constructor when cityForecast is present and city name matches', async () => {
-  //   weatherServiceMock.cityForecast.and.returnValue({
-  //     city: { name: 'Cardiff' }
-  //   });
-  //   weatherServiceMock.citiesWeather.and.returnValue([
-  //     { name: 'London', main: { temp: 15 }, wind: { speed: 5 } },
-  //     { name: 'Cardiff', main: { temp: 17 }, wind: { speed: 7 } }
-  //   ]);
-  //   // Recreate component to trigger effect
-  //   fixture = TestBed.createComponent(TabsViewComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  //   await fixture.whenStable();
-  //   fixture.detectChanges();
-  //   expect(component.selectedIndex).toBe(1);
-  // });
-
-  // it('should not change selectedIndex if city name not found', () => {
-  //   weatherServiceMock.cityForecast.and.returnValue({
-  //     city: { name: 'Edinburgh' }
-  //   });
-  //   weatherServiceMock.citiesWeather.and.returnValue([
-  //     { name: 'London', main: { temp: 15 }, wind: { speed: 5 } },
-  //     { name: 'Cardiff', main: { temp: 17 }, wind: { speed: 7 } }
-  //   ]);
-  //   fixture = TestBed.createComponent(TabsViewComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  //   expect(component.selectedIndex).toBeUndefined();
-  // });
-
   it('should call loadCityForecast with correct city name on tab change', () => {
     component.selectedIndex = 1;
     weatherServiceMock.citiesWeather.and.returnValue([
