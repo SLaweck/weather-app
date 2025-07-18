@@ -33,4 +33,21 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('mat-toolbar')?.textContent).toContain('WeatherApp');
   });
+
+  it('should call refreshCitiesWeather on ngOnInit', (done) => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const weatherServiceSpy = spyOn(app.weatherService, 'refreshCitiesWeather');
+    app.ngOnInit();
+    setTimeout(() => {
+      expect(weatherServiceSpy).toHaveBeenCalled();
+      done();
+    }, 10);
+  });
+
+  it('should inject WeatherService', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.weatherService).toBeTruthy();
+  });
 });

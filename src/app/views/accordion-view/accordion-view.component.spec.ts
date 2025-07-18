@@ -20,7 +20,32 @@ describe('AccordionViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should have citiesWeather defined', () => {
+    expect(component.citiesWeather).toBeDefined();
+  });
+
+  it('should have cityForecat defined', () => {
+    expect(component.cityForecat).toBeDefined();
+  });
+
+  it('should have units defined', () => {
+    expect(component.units).toBeDefined();
+  });
+
+  it('should initialize selectedCity signal with city name from cityForecat', () => {
+    const cityForecast = component.cityForecat();
+    if (cityForecast) {
+      expect(component.selectedCity()).toBe(cityForecast.city.name);
+    } else {
+      expect(component.selectedCity()).toBe('');
+    }
+  });
+
+  it('should call loadCityForecast and set selectedCity on panel open', () => {
+    const cityName = 'Amsterdam';
+    const loadCityForecastSpy = spyOn(component.weatherService, 'loadCityForecast');
+    component.onPanelOpen(cityName);
+    expect(loadCityForecastSpy).toHaveBeenCalledWith(cityName);
+    expect(component.selectedCity()).toBe(cityName);
   });
 });

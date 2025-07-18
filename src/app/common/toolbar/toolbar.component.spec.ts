@@ -29,9 +29,25 @@ describe('ToolbarComponent', () => {
     expect(component.title()).toEqual('WeatherApp');
   });
 
-  it('should render title', () => {
-    fixture.detectChanges();
+  it('should call refreshCitiesWeather when onRefreshClicked is called', () => {
+    const spy = spyOn(component.weatherService, 'refreshCitiesWeather');
+    component.onRefreshClicked();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should call setWeatherUnits with correct units when onUnitsMenuClicked is called', () => {
+    const spy = spyOn(component.weatherService, 'setWeatherUnits');
+    const units = 'imperial';
+    component.onUnitsMenuClicked(units);
+    expect(spy).toHaveBeenCalledWith(units);
+  });
+
+  it('should have weatherUnits from weatherService', () => {
+    expect(component.weatherUnits).toBe(component.weatherService.weatherUnits);
+  });
+
+  it('should render mat-toolbar element', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('mat-toolbar')?.textContent).toContain('WeatherApp');
+    expect(compiled.querySelector('mat-toolbar')).not.toBeNull();
   });
 });

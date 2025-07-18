@@ -20,7 +20,30 @@ describe('ForecastTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should have displayedColumns defined', () => {
+    expect(component.displayedColumns).toEqual([
+      'datetime',
+      'weather',
+      'temp',
+      'feels_like',
+      'temp_min',
+      'temp_max',
+      'pressure',
+      'wind',
+      'gust'
+    ]);
+  });
+
+  it('should have weatherService injected', () => {
+    expect(component.weatherService).toBeTruthy();
+  });
+
+  it('should have forecastList as an array', () => {
+    const forecast = component.forecastList();
+    expect(Array.isArray(forecast)).toBeTrue();
+  });
+
+  it('should have units defined from weatherService', () => {
+    expect(component.units).toBe(component.weatherService.weatherUnits);
   });
 });
